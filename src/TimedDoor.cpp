@@ -24,10 +24,13 @@ void TimedDoor::throwState() {
 
 int TimedDoor::getTime() { return iTimeout; }
 
-DoorTimerAdapter::DoorTimerAdapter(TimedDoor& _door) : door(_door){};
+DoorTimerAdapter::DoorTimerAdapter(TimedDoor& _door) : door(_door) {}
 
-void Timer::sleep(int time) {
-  std::this_thread::sleep_for(std::chrono::milliseconds(time * 1000));
+void Timer::sleep(int ti) {
+  time_t start = time(nullptr);
+  while (time(nullptr) - start < ti) {
+    continue;
+  }
 }
 
 void Timer::tregister(int time, TimerClient* timer) {

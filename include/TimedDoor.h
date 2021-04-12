@@ -4,8 +4,7 @@
 #define INCLUDE_TIMEDDOOR_H_
 
 #include<string>
-#include <chrono>
-#include <thread>
+#include <ctime>
 
 class DoorTimerAdapter;
 class Timer;
