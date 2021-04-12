@@ -3,6 +3,10 @@
 #ifndef INCLUDE_TIMEDDOOR_H_
 #define INCLUDE_TIMEDDOOR_H_
 
+#include<string>
+#include <chrono>
+#include <thread>
+
 class DoorTimerAdapter;
 class Timer;
 class Door;
@@ -24,8 +28,8 @@ class DoorTimerAdapter : public TimerClient {
  private:
   TimedDoor& door;
  public:
-  explicit DoorTimerAdapter(TimedDoor&);
-  void Timeout();
+  explicit DoorTimerAdapter(TimedDoor& _door);
+  void Timeout() override;
 };
 
 class TimedDoor : public Door {
@@ -35,11 +39,12 @@ class TimedDoor : public Door {
   bool opened;
  public:
   explicit TimedDoor(int);
-  bool isDoorOpened();
-  void unlock();
-  void lock();
+  bool isDoorOpened() override;
+  void unlock() override;
+  void lock() override;
   void DoorTimeOut();
   void throwState();
+  int getTime();
 };
 
 class Timer {
